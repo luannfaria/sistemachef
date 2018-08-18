@@ -1,0 +1,652 @@
+  body {
+  color: #333;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: #2980b9;
+  font-family: "Roboto", sans-serif;
+}
+
+.register {
+  display: grid;
+  grid-template-columns: 1.4fr 1.6fr;
+  height: 100vh;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+}
+.register .left {
+  border-radius: 5px 5px 2px #333;
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+
+.modal-contentdesconto{
+
+
+height:inherit;
+/* To center horizontally */
+margin: 0 auto;
+width: 65vh;
+height: 40vh;
+background: #fff;
+
+}
+
+
+
+.modal-content{
+
+
+height:inherit;
+/* To center horizontally */
+margin: 0 auto;
+width: 100vh;
+height: 70vh;
+background: #fff;
+
+}
+.modal-content .esquerda{
+
+display: grid;
+grid-template-columns: 1fr 1fr;
+height: 35vh;
+width: 70vh;
+
+
+
+
+}
+
+
+.modal-content .direita{
+
+position: relative;
+width: 100%;
+height: 20%;
+
+}
+.modal-content .esquerda .cedulas{
+
+
+list-style-type: none;
+padding: 0;
+margin: 2px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+
+
+}
+
+
+.modal-content .esquerda .payment-method{
+  display: flex;
+  margin: 0;
+width: 45vh;
+
+
+}
+
+.modal-content .esquerda .payment-method ul{
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: 1fr 1fr;
+width: 45vh;
+
+  border-width: 2px 1px 2px;
+
+  border-style: solid;
+
+
+  border-color:#fff;
+
+
+}
+.modal-content .esquerda .payment-method ul li{
+  height: 10vh;
+  width: 18vh;
+  background: #00a65a;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  cursor: pointer;
+  color:white;
+
+}
+.modal-content .esquerda .payment-method ul :hover {
+background: #008d4c;
+}
+
+.label{
+
+  font-size: 20px;
+cursor: pointer;
+}
+
+.modal-content .esquerda .cedulas .btn.btn-default.btn-lg{
+
+
+  background: #00a65a;
+  margin: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  cursor: pointer;
+  color:white;
+
+}
+.modal-contentdesconto .desconto{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 64vh;
+  height: 21vh;
+
+}
+
+.modal-contentdesconto .desconto span{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:flex-start;
+
+}
+
+
+.register .left .teste{
+    display: flex;
+   background: #2980b9;
+  height: 10vh;
+
+  border-width: 0px 0px 2px;
+
+  border-style: solid;
+
+
+  border-color:#fff;
+
+}
+
+
+.modal-content{
+
+
+  height:inherit;
+  /* To center horizontally */
+  margin: 0 auto;
+  width: 850px;
+  height: 80vh;
+  background: #fff;
+
+}
+.modal-content .esquerda{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 45vh;
+  width: 100%;
+
+
+
+
+}
+.modal-content .direita{
+  background-color: #eee;
+  position: relative;
+  width: 100%;
+  height: 20%;
+
+}
+.modal-content .esquerda .cedulas{
+
+
+  list-style-type: none;
+  padding: 0;
+  margin: 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+grid-template-rows: 1fr 1fr 1fr;
+}
+
+.modal-content .esquerda .cedulas button{
+
+  background-color: #2980b9 ;
+  padding: 0;
+  margin: 3px;
+  border: 0;
+  border-radius: 2px;
+border-color:#00acd6;
+  align-items: center;
+  justify-content: center;
+  height: 12vh;
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+
+}
+.input-number-group {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.input-number-group input[type=number]::-webkit-inner-spin-button,
+.input-number-group input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+          appearance: none;
+}
+
+.input-number-group .input-group-button {
+  line-height: calc(80px/2 - 5px);
+}
+
+.input-number-group .input-number {
+  width: 60px;
+  padding: 0 12px;
+  vertical-align: top;
+  text-align: center;
+  outline: none;
+  display: block;
+  margin: 0;
+
+}
+
+.input-number-group .input-number,
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+  border: 1px solid #cacaca;
+  height: 35px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: 4px;
+}
+
+.input-number-group .input-number-decrement,
+.input-number-group .input-number-increment {
+  display: inline-block;
+  width: 40px;
+  background: #e6e6e6;
+  color: #0a0a0a;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.input-number-group .input-number-decrement {
+  margin-right: 0.3rem;
+}
+
+.input-number-group .input-number-increment {
+  margin-left: 0.3rem;
+}
+
+
+.register .left .order-window {
+  background: #fff;
+  height: 67vh;
+  overflow-y: scroll;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.register .left . {
+    height: 20vh;
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+}
+
+.example_b {
+color: #fff !important;
+text-transform: uppercase;
+background: #60a3bc;
+padding: 20px;
+border-radius: 50px;
+display: inline-block;
+border: none;
+}
+
+
+.register .left .order-window table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.register .left .order-window table tr {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 4fr 1fr 2fr;
+  overflow-x: hidden;
+  font-size: 15px;
+
+}
+.register .left .order-window table tr td {
+  border: 0;
+  padding: 10px;
+  font-size: 15px;
+
+}
+.register .left .order-window table tr td:nth-child(3) {
+  display: grid;
+  justify-content: end;
+  font-size: 15px;
+}
+.register .left .order-window table tr td:nth-child(4) {
+  display: grid;
+  justify-content: center;
+  font-size: 15px;
+}
+.register .left .order-window table tr:nth-child(even) {
+  background-color: #eeeeee;
+}
+.register .left .order-window table tr:nth-child(odd) {
+  background-color: #E0E0E0;
+}
+.register .left .order-window table tr:first-child {
+  font-weight: bold;
+  background-color: #236c9c;
+  color: white;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+}
+.register .left .order-total {
+background: #d5d5d5;
+  display: flex;
+
+}
+
+.register .left .descricao{
+  background: #d5d5d5;
+  display: flex;
+  height: 8vh;
+}
+
+.modal-content .direita .totalvendamodal{
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+
+  margin:5px;
+}
+
+.modal-content .direita .totalvendamodal span{
+
+  background: #236c9c;
+  flex: 1;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  text-decoration: none;
+  font-size: 30px;
+
+}
+
+.register .left .order-total span{
+  background: #d5d5d5;;
+  flex: 1;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+
+}
+/*.modal-content .esquerda .payment-method{
+  width: 50%;
+  list-style-type: none;
+  padding: 0;
+  margin: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+grid-template-rows: 1fr 1fr;
+
+
+}*/
+
+.modal-content .esquerda .payment-method .ulpag{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+
+height: 8vh;
+ grid-template-columns: 0fr 0fr;
+grid-template-rows: 1fr 1fr;
+
+
+
+}
+.modal-content .esquerda .lipag{
+
+
+  height: 8vh;
+  background: #eeeeee;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+
+
+.label{
+  color: #333;
+    font-size: 14px;
+  cursor: pointer;
+}
+
+
+.register .left .buttons {
+  display: grid;
+  height: 10vh;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: 1fr 1fr;
+  background: #236c9c  ;
+
+  border-width: 2px 1px 2px;
+
+  border-style: solid;
+
+
+  border-color:#fff;
+}
+.register .left .buttons button {
+  background-color: #eeeeee;
+  padding: 0;
+  margin: 0.5px;
+  border: 0;
+  border-radius: 2px;
+}
+.register .left .buttons :hover {
+  background-color: #d5d5d5;
+}
+.register .right {
+  background-color: #2980b9;
+  position: relative;
+  z-index: 10px;
+}
+
+.register .right .teste2{
+    background: #2980b9;
+  height: 10vh;
+  border-width: 0px 0px 2px;
+
+  border-style: solid;
+
+
+  border-color:#fff;
+
+}
+.register .right .categories {
+  display: flex;
+  margin: 0;
+}
+.register .right .categories ul {
+  flex: 1;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  height: 10vh;
+  list-style-type: none;
+}
+.register .left .teste{
+  display: flex;
+  background: #2980b9;
+
+}
+.register .left .teste span{
+
+  background: #2980b9;
+  flex: 1;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+.register .right .categories ul li {
+
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.register .right .categories ul li a {
+
+  background: #236c9c;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+  color: white;
+  text-transform: uppercase;
+  text-decoration:none;
+
+    font-size: 20px;
+
+}
+.register .right .categories ul li :hover {
+  background: #2980b9;
+}
+.register .right .menu-items {
+  height: 57vh;
+  background: #fff;
+}
+.register .right .menu-items ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr 0.7fr ;
+  height: 57vh;
+  overflow-y: scroll;
+  cursor: pointer;
+}
+.register .right .menu-items ul li {
+  height: 10vh;
+  background: #2980b9;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  color: #fff;
+
+
+}
+.register .right .totalizador{
+    display: flex;
+  height: 8vh;
+  background: #d5d5d5;
+
+}
+.register .right .totalizador span{
+  background: #d5d5d5;
+  flex: 1;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+
+}
+
+
+.register .right .menu-items ul li .category {
+
+  font-weight: bold;
+  font-size: 23px;
+  text-transform: uppercase;
+}
+.register .right .menu-items ul :hover {
+  text-shadow: 1px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+  transition: all 0.4s ease 0s;
+  background: #2980b9;
+}
+.register .right .payment-keys ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  height: 10vh;
+  background: #236c9c;
+  color: white;
+  cursor: pointer;
+}
+.register .right .payment-keys ul li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-width: 2px 1px 2px;
+
+  border-style: solid;
+
+
+  border-color:#fff;
+}
+.register .right .payment-keys ul :hover {
+  background: #2980b9;
+}
