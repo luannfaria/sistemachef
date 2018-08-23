@@ -127,6 +127,9 @@
                       <li>
                                           <a href="<?php echo site_url('produto/gerarean'); ?>"><i class="fa fa-circle"></i> IMP.ETIQUETAS</a>
                                       </li>
+                                      <li>
+                                                          <a href="<?php echo site_url('observaco/index'); ?>"><i class="fa fa-circle"></i> OBSERVAÇÕES</a>
+                                                      </li>
 </ul>
 
 

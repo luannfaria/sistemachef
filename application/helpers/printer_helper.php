@@ -1,27 +1,35 @@
 <?php
-/* Call this file 'hello-world.php' */
 
-require __DIR__ . '/../../autoload.php';
-use Mike42\Escpos\CapabilityProfile;
+require __DIR__ .'/../../autoload.php';
+
+
+
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
-use Mike42\Escpos\Printer;
 
 function teste(){
+  $connector = new WindowsPrintConnector("itautec");
+
+        /* Print a "Hello world" receipt" */
+  $printer = new Printer($connector);
 
       // Enter the share name for your USB printer here
-    //  $connector = null;
+  //    $connector = "itautec";
+  $printer -> initialize();
+try {
 
 
-$connector = new WindowsPrintConnector("itautec");
 
-      /* Print a "Hello world" receipt" */
-      $printer = new Printer($connector);
-      $printer -> setJustification(Printer::JUSTIFY_CENTER);
-      $printer -> text("Hello World!");
-      $printer -> cut();
+
+    $printer->setJustification(Printer::JUSTIFY_CENTER);
+      $printer->text("Hello World!");
+$printer->cut();
 
       /* Close printer */
-      $printer -> close();
+$printer->close();
+
+      } catch(Exception $e) {
+  echo "Couldn't print to this printer: " . $e -> getMessage() . "\n";
+}
 
 }

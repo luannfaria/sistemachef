@@ -41,6 +41,14 @@ class Itenspedidomesa_model extends CI_Model
        return $this->db->get()->result_array();
      }
 
+     function getitensestoque($id){
+       $this->db->select('*');
+      $this->db->from('itenspedidomesa');
+      $this->db->where('idpedidomesa', $id);
+
+       return $this->db->get()->result_array();
+
+     }
      function subtotal($idpedidomesa){
 
        $sql = "SELECT sum(preco) as subtotal from itenspedidomesa where idpedidomesa='$idpedidomesa'";

@@ -14,6 +14,9 @@ class Pedidomesa extends CI_Controller{
             $this->load->model('Produto_model');
                 $this->load->model('Categoria_model');
                     $this->load->model('Itenspedidomesa_model');
+                    $this->load->model('Adicional_model');
+                      $this->load->model('Observaco_model');
+        $this->load->model('Pagamentopedidomesa_model');
     }
 
     /*
@@ -99,18 +102,6 @@ redirect('pedidomesa/editapedido/'.$pedido);
 
 
      }
-
-     public function desconto(){
-
-         $pedidomesa_id =  $this->input->post('formdescontoid');
-         $desconto =  $this->input->post('descontovalor');
-
- $null= $this->Pedidomesa_model->desconto($pedidomesa_id,$desconto);
-
-   echo json_encode(array('result'=> true));
-
-
-     }
      function testenovaview(){
        $this->load->view('pedidomesa/pedidomesa');
 
@@ -120,11 +111,11 @@ redirect('pedidomesa/editapedido/'.$pedido);
 
        $data['pedidomesa'] = $this->Pedidomesa_model->get_pedidomesa($pedido);
         $data['itenspedidomesa'] = $this->Itenspedidomesa_model->get_itenspedidomesa($pedido);
-
+          $data['valorespago'] = $this->Pagamentopedidomesa_model->get_pagamentopedidomesa($pedido);
       $data['empresa'] = $this->Empresa_model->get_empresamesa();
        //$this->$data['pedidomesa'] = $this->Pedidomesa_model->get_pedidomesa($pedido);
-
-
+       $data['observacoes']=$this->Observaco_model->get_todas_observacoes();
+       $data['adicionais']=$this->Adicional_model->get_all_adicionais();
        $data['produtos'] = $this->Produto_model->get_todos();
 $data['categoria'] = $this->Categoria_model->get_todos();
        //  $data['_view'] = 'pedidomesa/novo';
@@ -136,28 +127,7 @@ $this->load->view('pedidomesa/pedidomesa',$data);
      }
     function add()
     {
-    /*    if(isset($_POST) && count($_POST) > 0)
-        {
-            $params = array(
-				'data' => $this->input->post('data'),
-				'numeromesa' => $this->input->post('numeromesa'),
-				'idclientes' => $this->input->post('idclientes'),
-				'subtotal' => $this->input->post('subtotal'),
-				'taxaservico' => $this->input->post('taxaservico'),
-				'desconto' => $this->input->post('desconto'),
-				'pago' => $this->input->post('pago'),
-				'horaabertura' => $this->input->post('horaabertura'),
-				'horafechamento' => $this->input->post('horafechamento'),
-				'pessoasmesa' => $this->input->post('pessoasmesa'),
-				'totalpago' => $this->input->post('totalpago'),
-				'valoremaberto' => $this->input->post('valoremaberto'),
-            );
 
-            $pedidomesa_id = $this->Pedidomesa_model->add_pedidomesa($params);
-            redirect('pedidomesa/index');
-        }
-        else
-        { */
             $data['_view'] = 'pedidomesa/novo';
             $this->load->view('layouts/main');
     //   }
@@ -187,13 +157,13 @@ $this->load->view('pedidomesa/pedidomesa',$data);
     /*
      * Deleting pedidomesa
      */
-    function excluirpedido()
+    function excluirpedido($idpedidomesa)
     {
-$idpedidomesa = $this->input->post('idpedidomesa');
+//idpedidomesa = $this->input->post('idpedidomesa');
       				$this->Itenspedidomesa_model->delete_itempedidomesa($idpedidomesa);
       				$this->Pedidomesa_model->delete_pedidomesa($idpedidomesa);
       $this->Mesasaberta_model->delete_mesasaberta($idpedidomesa);
-      echo json_encode(array('result'=> true));
+    redirect('pedidomesa/index');
     }
 
 }

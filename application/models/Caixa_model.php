@@ -22,7 +22,11 @@ class Caixa_model extends CI_Model
     /*
      * Get all caixa
      */
+function removecaixa($idcaixa){
+    return $this->db->delete('caixa',array('idcaixa'=>$idcaixa));
 
+
+}
      function totaldia($data){
           $sql="select concat(formapagto,' R$ ',sum(valor)) as teste from caixa where data='$data' GROUP BY formapagto";
     //     $sql = "select formapagto, sum(valor) as valor, pgto from caixa where data='$data' group by formapagto";

@@ -10,6 +10,7 @@ class Itenspedidomesa extends CI_Controller{
         parent::__construct();
         $this->load->model('Itenspedidomesa_model');
           $this->load->model('Saidaproduto_model');
+          $this->load->model('Entradaproduto_model');
     }
 
     /*
@@ -145,6 +146,9 @@ echo json_encode(array('result'=> true));
 
 
             $iditenspedidomesa = $this->input->post('iditenspedidomesa');
+      //    $item[]=  $this->Itenspedidomesa_model->get_itempedidomesa($iditenspedidomesa);
+
+      
       $id = $this->Itenspedidomesa_model->delete_itempedidomesa($iditenspedidomesa);
 
       echo json_encode(array('result'=> true));

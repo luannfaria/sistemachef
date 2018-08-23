@@ -104,7 +104,7 @@ $estoque=$row->qtde;
      		$query = $this->db->get('produto');
      		if($query->num_rows() > 0){
      				foreach ($query->result_array() as $row){
-     						$row_set[] = array('label'=>$row['nomeproduto'].' | Preço: R$ '.$row['vendaproduto'].'','codbarra'=>$row['codbarra'],'produto_id'=>$row['produto_id'],'nomeproduto'=>$row['nomeproduto'],'vendaproduto'=>$row['vendaproduto']);
+     						$row_set[] = array('label'=>$row['nomeproduto'].' | Preço: R$ '.$row['vendaproduto'].'','produto_id'=>$row['produto_id'],'nomeproduto'=>$row['nomeproduto'],'vendaproduto'=>$row['vendaproduto']);
      				}
      				echo json_encode($row_set);
      		}

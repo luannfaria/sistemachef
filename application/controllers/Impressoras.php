@@ -4,6 +4,8 @@
  * www.crudigniter.com
  */
 
+
+ require __DIR__ . '/../../vendor/mike42/escpos-php/autoload.php';
  use Mike42\Escpos\Printer;
  use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
@@ -19,23 +21,6 @@ class Impressoras extends CI_Controller{
 }
 
     function impressaoteste(){
-
-
-      try {
-      		// Enter the device file for your USB printer here
-      	  $connector = new Escpos\PrintConnectors\WindowsPrintConnector("itautec");
-
-      		/* Print a "Hello world" receipt" */
-      		$printer = new Escpos\Printer($connector);
-      		$printer -> text("Hello World!\n");
-      		$printer -> cut();
-
-      		/* Close printer */
-      		$printer -> close();
-      } catch (Exception $e) {
-      	echo "Couldn't print to this printer: " . $e -> getMessage() . "\n";
-      }
-
 
 
 

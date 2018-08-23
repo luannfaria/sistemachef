@@ -16,9 +16,12 @@ class Pagamentopedidomesa_model extends CI_Model
      */
     function get_pagamentopedidomesa($idpagamentopedidomesa)
     {
-        return $this->db->get_where('pagamentopedidomesa',array('idpagamentopedidomesa'=>$idpagamentopedidomesa))->row_array();
+        return $this->db->get_where('pagamentopedidomesa',array('idpedidomesa'=>$idpagamentopedidomesa))->result_array();
     }
+function removepgto($idcaixa){
+  return $this->db->delete('pagamentopedidomesa',array('idcaixa'=>$idcaixa));
 
+}
     /*
      * Get all pagamentopedidomesa
      */

@@ -31,7 +31,7 @@
 
       <span>PEDIDO: <?php echo $pedidomesa['idpedidomesa'] ?></span>
 <span>INICIO: <?php echo $pedidomesa['horaabertura'] ?></span>
-      <span><STRONG>MESA <?php echo $pedidomesa['numeromesa'] ?> </STRONG></span>
+      <span><STRONG>MESA <?php echo $pedidomesa['numeromesa'] ?> </STRONG></span>+
 
 
 
@@ -41,6 +41,7 @@
       <table id="item">
         <tbody>
           <tr>
+            <td>Hora</td>
             <td>Qtdd</td>
             <td>Item</td>
             <td>Total</td>
@@ -49,10 +50,11 @@
           <?php foreach($itenspedidomesa as $item){ ?>
 
             <tr>
+              <td><strong><?php echo $item['horapedidoitem']; ?><strong></td>
     <td><strong><?php echo $item['quantidade']; ?><strong></td>
 
     <td><strong><?php echo $item['nomeitem']; ?></strong></td>
-    <td><strong><?php echo number_format((float)$item['quantidade']*$item['preco'],2,'.',''); ?></strong></td>
+    <td><strong><?php echo number_format((float)$item['preco'],2,'.',''); ?></strong></td>
 
 
 
@@ -84,7 +86,7 @@
 
               <input type="text" class="form-control" name="produto" id="produto"  placeholder="Pesquisar" required/>
 
-              <input type="hidden" name="idproduto" id="idproduto" value=""/>
+              <input type="hidden" name="idproduto" id="idproduto" />
 
 
 
@@ -95,7 +97,10 @@
               <input type="hidden" name="venda" id="venda" />
                 <input type="hidden" name="idpedido" id="idpedido" value="<?php echo $pedidomesa['idpedidomesa']?>" />
 
-
+<input type="hidden" id="vendaprodutoadicionado" value="" />
+<input type="hidden" id="nomeprodutoadicionado" value=""/>
+<input type="hidden" id="idprodutoadicionado" value=""/>
+<input type="hidden" id="subtotalitemadicionado" value=""/>
                     <input type="hidden" name="numeromesa" id="numeromesa" value="<?php echo  $pedidomesa['numeromesa'] ?>"/>
 
 
@@ -104,7 +109,7 @@
 
       <div class="col-lg-5">
 
-          <label for="idservico" class="control-label"> Qtdd</label>
+          <label for="qtde" class="control-label"> Qtdd</label>
 
         <div class="input-group input-number-group">
         <div class="input-group-button">
@@ -132,17 +137,110 @@
     <div id="todos" class="menu-items">
       <ul id="produtolista">
 
-    <!--    <li data-nome="" data-venda="" data-id="">
-        <i class="fas fa-beer fa-2x  fa-fw" data-fa-transform="up-3"></i>
-          <span class="item"></span>
-          <span class="category"></span>
-        </li>!-->
 
 
       </ul>
 
 
     </div>
+
+
+      <div class="modal fade" id="modalprodutopedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">ADICIONAR PRODUTO</h4>
+            </div>
+            <div class="itempedidomesa">
+              <div class="produtomodal">
+                <span id="itemselecionado">
+
+                </span>
+<span id="valoritemselecionado"></span>
+<span id="qtdditemselecionado"></span>
+              </div>
+
+
+              <span></span>
+
+            </div>
+            <div class="adicionais">
+
+                  <span>
+                  <table class="table table-condensed">
+                      <thead>
+                        <tr>
+                          <th>
+                            #
+                          </th>
+                          <th>
+                            Adicional
+                          </th>
+                          <th>
+                            Preço
+                          </th>
+                        </tr>
+                          <div id="check">
+                        <?php foreach ($adicionais as $ad) { ?>
+                          <tr>
+                              <td><input type="checkbox" name="adicionais[]" data-venda="<?php echo $ad['valor'] ?>" data-nome="<?php echo $ad['nome'] ?>"value="<?php echo $ad['idadicionais'] ?>" >
+<input type="hidden" name="vendaadicional[]" value="<?php echo $ad['valor'] ?>">
+                                  <input type="hidden" name="nomeadicional[]" value="<?php echo $ad['nome'] ?>">
+                              </td>
+                              <td>
+                                <?php echo $ad['nome'] ?>
+                              </td>
+                              <td>
+                                <?php echo $ad['valor'] ?>
+                              </td>
+                          </tr>
+                <?php        } ?>
+
+</div>
+                      </thead>
+                    </table>
+
+                  </span>
+                  <span>
+
+                    <table class="table table-condensed">
+                        <thead>
+                          <tr>
+                            <th>
+                              #
+                            </th>
+                            <th>
+                              Observação
+                            </th>
+
+                          </tr>
+
+
+
+                          <?php foreach ($observacoes as $ob) { ?>
+                            <tr>
+                              <td><input type="checkbox" name="observacao[]" value="<?php echo $ob['idobservacoes'] ?>" >
+
+                                  <input type="hidden" name="nomeobservacao[]" value="<?php echo $ob['nome'] ?>">
+                              </td>
+                                <td>
+                                  <?php echo $ob['nome'] ?>
+                                </td>
+
+                            </tr>
+                  <?php        } ?>
+
+
+                        </thead>
+                      </table>
+
+                  </span>
+                </div>
+            </div>
+            </div>
+          </div>
+
     <div id="total"class="totalizador">
 
       <?php
@@ -176,10 +274,10 @@
         <li  href="#desconto" data-toggle="modal">
           <i class="fas fa-cart-arrow-down fa-2x fa-fw" data-fa-transform="up-2"></i> Desconto
         </li>
-        <li>
+        <li href="<?php echo base_url('pedidomesa/imprimiconta/'.$pedidomesa['idpedidomesa']);?>">
           <i class="fas fa-print fa-2x fa-fw" data-fa-transform="up-2"></i> Imprimir
         </li>
-        <li  onclick="excluirpedido();" id="excluirpedido"  data-idpedido="<?php echo $pedidomesa['idpedidomesa']?>">
+        <li  href="<?php echo site_url('pedidomesa/excluirpedido/'.$pedidomesa['idpedidomesa']); ?>" id="excluirpedido" data-confirm="Tem certeza que deseja excluir essa mesa?">
           <i class="fas fa-trash fa-2x fa-fw"  ></i> Excluir
         </li>
         <li  onclick="sair();">
@@ -241,41 +339,39 @@
 
 
                       <div class="esquerda">
-                        <div class="payment-method">
+                        <div id="paymentmethod"class="payment-method">
                         <ul id="ulpag">
-               <li class="lipag" data-pgto="dinheiro">
+               <li class="lipag" data-pgto="DINHEIRO">
 
                  <input name="pag" type="radio" class="radio hidden" value="DINHEIRO" id="DINHEIRO">
   <label class="label" for="dinheiro"> DINHEIRO</label>
                </li>
 
-               <li class="lipag"  data-pgto="credito">
+               <li class="lipag"  data-pgto="CREDITO">
 
                  <input name="pag" type="radio"  class="radio hidden"value="CREDITO" id="CREDITO">
                    <label class="label" for="credito">CRÉDITO</label>
                </li>
 
-               <li class="lipag" data-pgto="debito">
+               <li class="lipag" data-pgto="DEBITO">
 
                  <input name="pag" type="radio"  class="radio hidden" value="DEBITO" id="DEBITO">
               <label class="label" for="debito">DEBITO</label>
                </li>
-               <li class="lipag"  data-pgto="cheque">
+               <li class="lipag"  data-pgto="CHEQUE">
 
                  <input name="pag" type="radio"  class="radio hidden" value="CHEQUE" id="CHEQUE">
            <label class="label"for="cheque">  CHEQUE</label>
                </li>
 
-            <!--   <li class="lipag"  data-pgto="fiado">
 
-                 <input name="pag" type="radio"  class="radio hidden"value="fiado" id="fiado">
-            <label class="label" for="fiado">  PRAZO</label>
-          </li>!-->
              </ul>
 
 
   </div>
-  <div id="cedulas" class="cedulas" style="visibility:hidden;">
+  <div id="cedulas" class="cedulas" style="display:none;">
+<div class="buttons">
+
 
                 <button class="btn btn-default btn-lg" value="2" onclick="dois(this);"><strong>R$ 2.00</strong> </button>
                 <button  class="btn btn-default btn-lg" value="5"  onclick="cinco(this)"><strong>R$ 5.00 </strong></button>
@@ -285,9 +381,40 @@
                       <button  class="btn btn-default btn-lg" value="100"  onclick="cem(this)"><strong>R$ 100.00 </strong></button>
                         <button  class="btn btn-default btn-lg" value="0"  onclick="restante(this)"><strong>RESTANTE<br>R$ <?php echo $total - $desconto - number_format((float)$valorpago,2,'.',''); ?></strong></button>
                         <span>
+                          </div>
   </div>
+<div class="tabelavalorespagos  ">
+  <table class="table table-condensed">
+      <thead>
 
+        <tr>
+
+
+          <th>
+          VALOR PAGO
+          </th>
+          <th>
+          AÇÕES
+          </th>
+        </tr>
+
+        <?php foreach($valorespago as $vl){ ?>
+          <tr>
+
+
+            <td> <?php echo $vl['valor'] ?></td>
+<td>
+  <span onclick="removepgto(<?php echo $vl['idcaixa'] ?>)" title="Excluir" class="btn btn-danger btn-xs"> Excluir</span>
+
+</td>
+          </tr>
+
+        <?php }?>
+      </thead>
+    </table>
+</div>
                       </div>
+
                       <div class="direita">
 
 
@@ -295,7 +422,7 @@
                           <span>Pago em: </span>
                           <span>Recebido </span>
                           <span>Troco </span>
-  <span id="frm"></span>
+  <span id="frm"> - </span>
   <span id="totalrecebido">R$ 0.00</span>
   <span id="troco">R$ 0.00</span>
                       </div>
@@ -364,32 +491,7 @@ alert('Ocorreu um erro ao tentar excluir serviço.');
   }
 });
 
-$(document).on('click', 'span', function(event) {
-            var $id = $(this).attr('idAcao');
-            if(($id % 1) == 0){
 
-                $.ajax({
-                  type: "POST",
-                  url: "<?php echo base_url();?>itenspedidomesa/remove",
-                  data: "iditenspedidomesa="+$id,
-                  dataType: 'json',
-                  success: function(data)
-                  {
-                    if(data.result == true){
-
-                        location.reload();
-
-}
-else{
-
-alert('Ocorreu um erro ao tentar excluir serviço.');
-}
-                  }
-                  });
-                  return false;
-            }
-
-       });
 
  var vlrini =0;
  var troco = 0.00;
@@ -565,41 +667,161 @@ document.getElementById("troco").innerHTML = tr;
   document.getElementById("totalrecebido").innerHTML = val;
 }
 
-function excluirpedido(){
+$('#modalprodutopedido').keypress(function(e) {
+
+  if(e.wich == 13 || e.keyCode == 13){
+//on('hidden.bs.modal', function () {
 
 
-  var idpedidomesa = document.getElementById("idpedido").value;
-    //var venda = $this.attr("data-venda");
-
-  $.ajax({
-  type: "POST",
-  url:"<?php echo base_url();?>pedidomesa/excluirpedido",
-  data:"idpedidomesa="+idpedidomesa,
-  dataType:'json',
-  success:function(data)
-  {
-
-  if(data.result == true){
-
-window.location.href="<?php echo base_url();?>pedidomesa/index";
-  }
-
-  else{
 
 
-  location.reload();
+
+        var hora = document.getElementById("hora").value;
+
+     var idpedido = document.getElementById("idpedido").value;
+     var numeromesa = document.getElementById("numeromesa").value;
+var qtdd = document.getElementById("qtdd").value;
+var valordoitem = (qtdd*(Number(document.getElementById("vendaprodutoadicionado").value)));
+
+var nomeprodutoadicionado = document.getElementById("nomeprodutoadicionado").value;
+var insereadicional = '';
+var insereobs = '';
+var idprodutoadicionado = document.getElementById("idprodutoadicionado").value;
+
+     var elems= document.getElementsByName('adicionais[]');
+     var obser = document.getElementsByName('observacao[]');
+     var nomeobs = document.getElementsByName('nomeobservacao[]');
+       var nomeadd = document.getElementsByName('nomeadicional[]');
+       var valoradd = document.getElementsByName('vendaadicional[]');
+                     for (var i=0;i<elems.length;i++)
+                     {
+
+                         var isChecked =elems[i].checked;
+                         if(isChecked==true){
+                           var adicional = elems[i].value;
+                           var nome = nomeadd[i].value;
+                           insereadicional += '<br />&nbsp;&nbsp;&nbsp; + '+ nome;
+                           valordoitem+=Number(valoradd[i].value);
+                         //  var $this = $(this);
+                         //  var pgto = elems[i].;
+                           alert(nome);
+                         }
+                       //  console.log(isChecked);
+
+                     }
+
+                     for (var i=0;i<obser.length;i++)
+                     {
+
+                         var isChecked =obser[i].checked;
+                         if(isChecked==true){
+                           var adicional = elems[i].value;
+                           var nome = nomeobs[i].value;
+                           insereobs += '<br />&nbsp;&nbsp;&nbsp; - '+ nome;
+
+                         //  var $this = $(this);
+                         //  var pgto = elems[i].;
+                           alert(nome);
+                         }
+                       //  console.log(isChecked);
+
+                     }
+
+'<br />teste';
+  var tr = '<tr>'+
+  '<td>'+hora+'</td>'+
+    '<td>'+qtdd+'</td>'+
+    '<td><strong>'+nomeprodutoadicionado+insereadicional+insereobs+'</strong></td>'+
+    '<td><strong>'+valordoitem.toFixed(2)+'</strong></td>'+
 
 
-  }
+    '<td></td>'
 
-  }
 
-  });
+
+
+    '</tr>'
+  $('#item').find('tbody').append( tr );
+
+
+
+                  var hiddens =  '<input type="hidden" name="nomeproduto[]" value="'+nomeprodutoadicionado+insereadicional+insereobs+'" />'+
+
+                    '<input type="hidden" name="hora[]" value="'+hora+'" />'+
+
+                    '<input type="hidden" name="idpedido[]" value="'+idpedido+'" />'+
+                    '<input type="hidden" name="vendaitem[]" value="'+valordoitem+'" />'+
+                    '<input type="hidden" name="numeromesa[]" value="'+numeromesa+'" />'+
+  '<input type="hidden" name="quantidade[]" value="'+qtdd+'" />'+
+                    '<input type="hidden" name="idproduto[]" value="'+idprodutoadicionado+'" />';
+
+                  $('#form_insert').find('fieldset').append( hiddens );
+$('input:checkbox').removeAttr('checked');
+  $("#qtdd").val("1");
+    $('#modalprodutopedido').modal('hide');
   return false;
-
 }
 
-$("#produto").autocomplete({
+});
+
+
+
+function removepgto(valor){
+
+  $.ajax({
+    type: "POST",
+    url: "<?php echo base_url();?>pagamentopedidomesa/removepgto",
+    data: "idpgto="+valor,
+    dataType: 'json',
+    success: function(data)
+    {
+      if(data.result == true){
+
+          location.reload();
+
+}
+else{
+
+alert('Ocorreu um erro ao tentar excluir serviço.');
+}
+    }
+    });
+    return false;
+}
+
+
+
+$('#excluirpedido').click(function(){
+
+
+  var verificapgto = document.getElementById("valorpago").value;
+if(verificapgto > 1){
+
+var ok = "VENDA NÃO PODE SER CANCELA. EXISTE PAGAMENTO JÁ REALIZADO PARA ESSA VENDA";
+alert(ok);
+
+}
+else{
+var href = $(this).attr('href');
+if(!$('#dataConfirmModal').length){
+$('body').append('<div id="dataConfirmModal" class="modal fade" role="dialog" aria-labelledby="myModalLabel" tabindex="-1"aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button><h2 id="dataConfirmLabel">Pedido</h2></div><h2><div class="modal-body"></div></h2><div class="modal-footer"><a class="btn btn-success btn-lg col-lg-4" id="dataConfirmOK">SIM</a> <button  class="btn btn-danger btn-lg col-lg-4" data-dismiss="modal" aria-hidden="true">NÃO</button></div></div></div></div>');
+}
+$('#dataConfirmModal').find('.modal-body').text($(this).attr('data-confirm'));
+$('#dataConfirmOK').attr('href',href);
+$('#dataConfirmModal').modal({show:true});
+return false;
+}
+
+
+
+
+
+
+
+
+});
+
+$('#produto').autocomplete({
 
     source: "<?php echo base_url(); ?>produto/autoCompleteProduto",
 
@@ -731,8 +953,8 @@ document.getElementById("frm").innerHTML = pgto;
 
 
                    $("#formapgtoselecionada").val(pgto);
-
-                   document.getElementById("cedulas").style.visibility = 'visible';
+                       document.getElementById("paymentmethod").style.display = 'none';
+                   document.getElementById("cedulas").style.display = 'block';
 
 })
 
@@ -807,54 +1029,35 @@ li.setAttribute('data-id',idpro);
 //  alert(idcat);
 })
 
-
+/*ADICIONA PRODUTO / ADICIONAIS / OBSERVAÇÕES */
 $( "#produtolista" ).on( "click", "li", function( ) {
+
+var qtdd = document.getElementById("qtdd").value;
     var $this = $(this);
     var idproduto = $this.attr("data-id");
       var venda = $this.attr("data-venda");
-//    alert('Text ' + $this.text() + 'value ' + selKeyVal);
+
 
 var nomeproduto = $this.attr("data-nome");
-  //  var idproduto = document.getElementById("idproduto").value;
-//    var venda = document.getElementById("venda").value;
-    var qtdd = document.getElementById("qtdd").value;
-    //var garcom = document.getElementById("garcom").value;
-          var hora = document.getElementById("hora").value;
-    //    var nomeproduto = document.getElementById("nomeproduto").value;
-       var idpedido = document.getElementById("idpedido").value;
+document.getElementById("itemselecionado").innerHTML = nomeproduto;
+document.getElementById("valoritemselecionado").innerHTML = 'R$ '+venda;
+document.getElementById("qtdditemselecionado").innerHTML = 'Qtde: '+qtdd;
+   document.getElementById('idprodutoadicionado').value = idproduto;
+
+document.getElementById('vendaprodutoadicionado').value = venda;
+document.getElementById('nomeprodutoadicionado').value = nomeproduto;
+
+
 
        var subtotal = (venda*qtdd).toFixed(2);
-    var tr = '<tr>'+
-      '<td>'+qtdd+'</td>'+
-      '<td><strong>'+nomeproduto+'</strong></td>'+
-      '<td><strong>'+subtotal+'</strong></td>'+
+document.getElementById('subtotalitemadicionado').value = subtotal;
 
-
-      '<td></td>'
+       $('#modalprodutopedido').modal('show');
 
 
 
 
-      '</tr>'
-    $('#item').find('tbody').append( tr );
 
-
-
-                    var hiddens =  '<input type="hidden" name="nomeproduto[]" value="'+nomeproduto+'" />'+
-
-                      '<input type="hidden" name="hora[]" value="'+hora+'" />'+
-
-                      '<input type="hidden" name="idpedido[]" value="'+idpedido+'" />'+
-                      '<input type="hidden" name="vendaitem[]" value="'+venda+'" />'+
-                      '<input type="hidden" name="numeromesa[]" value="'+numeromesa+'" />'+
-    '<input type="hidden" name="quantidade[]" value="'+qtdd+'" />'+
-                      '<input type="hidden" name="idproduto[]" value="'+idproduto+'" />';
-
-                    $('#form_insert').find('fieldset').append( hiddens );
-
-
-
-                 $("#qtdd").val("1");
 
     return false;
 })

@@ -39,6 +39,18 @@ class Pagamentopedidomesa extends CI_Controller{
       if($vlrpgto>=($totalpedido-$totalpago)){
 
         $vlr = ($totalpedido-$totalpago);
+
+
+        $caixa = array(
+              'data'=>$this->input->post('data'),
+              'valor'=> number_format((float)$vlr,2,'.',''),
+              'descricao'=>$this->input->post('descricao'),
+                'tipomovimentacao' => $this->input->post('tipomovimentacao'),
+                  'formapagto' => $this->input->post('formapgtoselecionada')
+
+        );
+
+        $idcaixa=$this->Caixa_model->add_caixa($caixa);
         $params = array(
     'idpedidomesa' => $idpedidomesa,
     'data'=>$this->input->post('data'),
@@ -48,27 +60,28 @@ class Pagamentopedidomesa extends CI_Controller{
   //	'data' => $this->input->post('data'),
     'tipomovimentacao' => $this->input->post('tipomovimentacao'),
   //	'usuario_id' => $this->input->post('usuario_id'),
+  'idcaixa'=>$idcaixa,
     'formapagto' => $this->input->post('formapgtoselecionada')
   );
 
   $pagamentopedidomesa_id = $this->Pagamentopedidomesa_model->add_pagamentopedidomesa($params);
 $this->Mesasaberta_model->delete_mesasaberta($idpedidomesa);
 
-$caixa = array(
-      'data'=>$this->input->post('data'),
-      'valor'=> number_format((float)$vlr,2,'.',''),
-      'descricao'=>$this->input->post('descricao'),
-        'tipomovimentacao' => $this->input->post('tipomovimentacao'),
-          'formapagto' => $this->input->post('formapgtoselecionada')
 
-);
-
-  $this->Caixa_model->add_caixa($caixa);
   echo json_encode(array('result'=> false));
 }
 
 else{
+  $caixa = array(
+        'data'=>$this->input->post('data'),
+        'valor'=> $this->input->post('vlrpgto'),
+        'descricao'=>$this->input->post('descricao'),
+          'tipomovimentacao' => $this->input->post('tipomovimentacao'),
+            'formapagto' => $this->input->post('formapgtoselecionada')
 
+  );
+
+    $idcaixa = $this->Caixa_model->add_caixa($caixa);
 
             $params = array(
 				'idpedidomesa' => $idpedidomesa,
@@ -77,22 +90,13 @@ else{
 			//	'idformapagamento' => $this->input->post('idformapagamento'),
 			//	'data' => $this->input->post('data'),
 				'tipomovimentacao' => $this->input->post('tipomovimentacao'),
-			//	'usuario_id' => $this->input->post('usuario_id'),
+		'idcaixa'=>$idcaixa,
 				'formapagto' => $this->input->post('formapgtoselecionada')
       );
           $pagamentopedidomesa_id = $this->Pagamentopedidomesa_model->add_pagamentopedidomesa($params);
           echo json_encode(array('result'=> true));
 
-          $caixa = array(
-                'data'=>$this->input->post('data'),
-                'valor'=> $this->input->post('vlrpgto'),
-                'descricao'=>$this->input->post('descricao'),
-                  'tipomovimentacao' => $this->input->post('tipomovimentacao'),
-                    'formapagto' => $this->input->post('formapgtoselecionada')
 
-          );
-
-            $this->Caixa_model->add_caixa($caixa);
 }
 
 
@@ -145,6 +149,17 @@ else{
     /*
      * Deleting pagamentopedidomesa
      */
+
+     function removepgto(){
+
+       $idcaixa = $this->input->post('idpgto');
+       $this->Caixa_model->removecaixa($idcaixa);
+
+       $this->Pagamentopedidomesa_model->removepgto($idcaixa);
+
+           echo json_encode(array('result'=> true));
+
+     }
     function remove($idpagamentopedidomesa)
     {
         $pagamentopedidomesa = $this->Pagamentopedidomesa_model->get_pagamentopedidomesa($idpagamentopedidomesa);

@@ -4,10 +4,14 @@
             <div class="box-header">
                 <h3 class="box-title">CATEGORIAS</h3>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('impressoras/impressaoteste'); ?>" class="btn btn-success">TESTE THERMAL</a>
+                    <a href="<?php echo site_url('categoria/imprime'); ?>" class="btn btn-success">TESTE THERMAL</a>
                     <a href="<?php echo site_url('categoria/add'); ?>" class="btn btn-success">NOVA CATEGORIA</a>
                 </div>
             </div>
+
+
+
+ 
             <div class="box-body">
                 <table class="table table-striped">
                     <tr>
@@ -35,3 +39,14 @@
         </div>
     </div>
 </div>
+<script src="<?php echo site_url('resources/js/jquery.js');?>"></script>
+<script src="<?php echo site_url('resources/js/jquery-ui-1.10.4.min.js');?>"></script>
+
+<script>
+$('#testarimpressora').click(function(){
+
+
+
+});
+
+</script>
