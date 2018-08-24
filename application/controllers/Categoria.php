@@ -97,7 +97,9 @@ class Categoria extends CI_Controller{
 
 
      function imprime(){
-  
+
+           $this->load->view('categoria/printer');
+
      }
     function remove($idcategoria)
     {

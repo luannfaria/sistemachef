@@ -258,6 +258,7 @@
         <span><strong>Desconto R$ <?php echo  number_format((float)$desconto,2,'.','') ?></strong></span>
       <span><strong>Serviço R$ <?php echo  number_format((float)$valortaxa,2,'.','') ?></strong></span>
       <span><strong>Total R$ <?php echo  number_format((float)$total,2,'.','') ?></strong></span>
+
     </div>
     <form id="form_insert" action="" method="post">
 
@@ -274,8 +275,10 @@
         <li  href="#desconto" data-toggle="modal">
           <i class="fas fa-cart-arrow-down fa-2x fa-fw" data-fa-transform="up-2"></i> Desconto
         </li>
-        <li href="<?php echo base_url('pedidomesa/imprimiconta/'.$pedidomesa['idpedidomesa']);?>">
-          <i class="fas fa-print fa-2x fa-fw" data-fa-transform="up-2"></i> Imprimir
+        <li>
+
+      <a style="color:white;"href="<?php echo base_url('impressoras/imprimiconta/'.$pedidomesa['idpedidomesa']);?>">
+          <i class="fas fa-print fa-2x fa-fw" data-fa-transform="up-2"></i> Imprimir</a>
         </li>
         <li  href="<?php echo site_url('pedidomesa/excluirpedido/'.$pedidomesa['idpedidomesa']); ?>" id="excluirpedido" data-confirm="Tem certeza que deseja excluir essa mesa?">
           <i class="fas fa-trash fa-2x fa-fw"  ></i> Excluir
@@ -676,6 +679,7 @@ $('#modalprodutopedido').keypress(function(e) {
 
 
 
+
         var hora = document.getElementById("hora").value;
 
      var idpedido = document.getElementById("idpedido").value;
@@ -756,6 +760,8 @@ var idprodutoadicionado = document.getElementById("idprodutoadicionado").value;
                     '<input type="hidden" name="idproduto[]" value="'+idprodutoadicionado+'" />';
 
                   $('#form_insert').find('fieldset').append( hiddens );
+
+                //  document.getElementById("totalpedido").innerHTML = (valordoitem+valorvenda).toFixed(2);
 $('input:checkbox').removeAttr('checked');
   $("#qtdd").val("1");
     $('#modalprodutopedido').modal('hide');

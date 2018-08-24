@@ -4,26 +4,42 @@
  * www.crudigniter.com
  */
 
-
- require __DIR__ . '/../../vendor/mike42/escpos-php/autoload.php';
- use Mike42\Escpos\Printer;
- use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-
- //use Mike42\Escpos\Printer;
- //use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+require __DIR__ .'/../third_party/mpdf/mpdf.php';
 class Impressoras extends CI_Controller{
 
   public function __construct() {
    parent::__construct();
+
   // $this->load->library('escpos');
+  $this->load->model('Pedidomesa_model');
+    $this->load->model('Mesasaberta_model');
+      $this->load->model('Empresa_model');
+      $this->load->model('Produto_model');
+          $this->load->model('Categoria_model');
+              $this->load->model('Itenspedidomesa_model');
+              $this->load->model('Adicional_model');
+                $this->load->model('Observaco_model');
+  $this->load->model('Pagamentopedidomesa_model');
 
 
 }
 
-    function impressaoteste(){
+    function imprimiconta($idpedido){
+
+      $data['pedidomesa'] = $this->Pedidomesa_model->get_pedidomesa($idpedido);
+       $data['itenspedidomesa'] = $this->Itenspedidomesa_model->get_itenspedidomesa($idpedido);
+         $data['valorespago'] = $this->Pagamentopedidomesa_model->get_pagamentopedidomesa($idpedido);
+         $data['empresa']= $this->Empresa_model->get_empresamesa();
 
 
+$html =$this->load->view('pedidomesa/conta',$data,true);
 
+//generate the PDF from the given html
+$mpdf = new mpdf();
 
+      $mpdf->WriteHTML($html);
+
+        //download it.
+      	$mpdf->Output();
     }
   }
