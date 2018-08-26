@@ -59,7 +59,13 @@ function valordescontomesa($idpedidomesa){
   $CI->load->model('Pedidomesa_model');
   $desconto = $CI->Pedidomesa_model->descontovlr($idpedidomesa);
 
-  return $desconto;
+  if($desconto>0){
+    return $desconto;
+  }
+  else{
+    $desconto='0.00';
+      return $desconto;
+  }
 
 
 }
@@ -109,7 +115,15 @@ function valortaxa($idpedidomesa){
     $taxa = $CI->Empresa_model->get_taxa();
     $valortaxa = ($totalitens*$taxa)/100;
 
-    return $valortaxa;
+
+
+    if($valortaxa>0){
+      return $valortaxa;
+    }
+    else{
+      $valortaxa='0.00';
+        return $valortaxa;
+    }
 
 
 
@@ -122,6 +136,12 @@ function pago($idpedidomesa){
   $CI->load->model('Pagamentopedidomesa_model');
   $pago = $CI->Pagamentopedidomesa_model->pago($idpedidomesa);
 
-  return $pago;
+  if($pago>0){
+    return $pago;
+  }
+  else{
+    $pago='0.00';
+      return $pago;
+  }
 
 }

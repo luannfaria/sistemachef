@@ -89,6 +89,12 @@ class Pedidomesa_model extends CI_Model
      * function to add new pedidomesa
      */
 
+     function npessoas($idpedidopdv,$params)
+     {
+         $this->db->set('pessoasmesa',$params);
+         $this->db->where('idpedidomesa',$idpedidopdv);
+         return $this->db->update('pedidomesa');
+     }
 
     function desconto($idpedidopdv,$params)
     {
@@ -101,7 +107,10 @@ class Pedidomesa_model extends CI_Model
         $this->db->insert('pedidomesa',$params);
         return $this->db->insert_id();
     }
-
+function indice($params){
+  $this->db->insert('totalpedidos',$params);
+  return $this->db->insert_id();
+}
     /*
      * function to update pedidomesa
      */

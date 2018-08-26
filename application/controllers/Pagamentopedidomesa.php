@@ -67,7 +67,11 @@ class Pagamentopedidomesa extends CI_Controller{
   $pagamentopedidomesa_id = $this->Pagamentopedidomesa_model->add_pagamentopedidomesa($params);
 $this->Mesasaberta_model->delete_mesasaberta($idpedidomesa);
 
-
+  $indicepedidos = array(
+    'data'=>$this->input->post('data'),
+    'indice'=>1
+  );
+$this->Pedidomesa_model->indice($indicepedidos);
   echo json_encode(array('result'=> false));
 }
 

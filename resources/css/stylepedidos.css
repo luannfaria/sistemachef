@@ -34,8 +34,26 @@ background: #fff;
 
 }
 
+.modal-contentpessoas{
+  height:inherit;
+  /* To center horizontally */
+  margin: 0 auto;
 
 
+width: 40vh;
+height: 22vh;
+background: #fff;
+
+}
+
+
+.modal-contentpessoas .frmpessoas{
+
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: center;
+}
 .modal-content{
 
 
@@ -216,19 +234,7 @@ cursor: pointer;
 }
 
 
-.register .left .teste{
-    display: flex;
-   background: #2980b9;
-  height: 10vh;
 
-  border-width: 0px 0px 2px;
-
-  border-style: solid;
-
-
-  border-color:#fff;
-
-}
 
 
 .modal-content{
@@ -445,10 +451,32 @@ background: #d5d5d5;
 
 .register .left .descricao{
   background: #d5d5d5;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 8vh;
 }
+.register .left .descricao span{
+background: #d5d5d5;
+flex: 1;
+display: flex;
 
+align-items: center;
+justify-content: center;
+height: 8vh;
+color: #000;
+text-decoration: none;
+font-size: 1.4em;
+border: 1px solid #fff;
+}
+
+.register .left .descricao .pessoas a{
+  color: #0a0a0a;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 2rem;
+cursor: pointer;
+}
 .modal-content .direita .totalvendamodal{
 
   display: grid;
@@ -539,11 +567,11 @@ grid-template-rows: 1fr 1fr;
 
 .register .left .buttons {
   display: grid;
-  height: 10vh;
-  grid-template-columns: 1fr 1fr ;
-  grid-template-rows: 1fr 1fr;
+  height: 11vh;
+  grid-template-columns: 1fr 1fr 1fr ;
+align-items: center;
   background: #236c9c  ;
-
+text-align: center;
   border-width: 2px 1px 2px;
 
   border-style: solid;
@@ -568,45 +596,61 @@ grid-template-rows: 1fr 1fr;
 }
 
 .register .right .teste2{
-    background: #2980b9;
+    background: #d5d5d5;
   height: 10vh;
-  border-width: 0px 0px 2px;
+  border-width: 2px 1px 2px;
 
   border-style: solid;
-
-
-  border-color:#fff;
+  border-color:#000;
 
 }
 .register .right .categories {
   display: flex;
-  margin: 0;
+height: 10vh;
+
+
 }
 .register .right .categories ul {
   flex: 1;
   display: flex;
   margin: 0;
   padding: 0;
-  height: 10vh;
+
   list-style-type: none;
+
 }
 .register .left .teste{
+  border-width: 2px 1px 2px;
+
+  border-style: solid;
+  border-color:#000;
+
+
+  height: 10vh;
   display: flex;
-  background: #2980b9;
+  background: #d5d5d5;
+  border-style: solid;
+
+
+
 
 }
 .register .left .teste span{
 
-  background: #2980b9;
+  background: #d5d5d5;
   flex: 1;
   display: flex;
 
   align-items: center;
   justify-content: center;
-  height: 10vh;
-  color: white;
+
+  color: #000;
   text-decoration: none;
   font-size: 20px;
+
+
+
+
 }
 .register .right .categories ul li {
     border-radius: 4px;
@@ -627,7 +671,7 @@ margin: 0.4em;
   color: white;
   text-transform: uppercase;
   text-decoration:none;
-
+margin-top: 4px;
     font-size: 1.3em;
 
 }
@@ -672,8 +716,10 @@ margin: 0.4em;
 }
 .register .right .totalizador span{
   background: #d5d5d5;
-  flex: 1;
+  flex:auto;
   display: flex;
+  padding: 0;
+  margin: 0;
 
   align-items: center;
   justify-content: center;
@@ -681,7 +727,12 @@ margin: 0.4em;
   color: #000;
   text-decoration: none;
   font-size: 1.4em;
-border: 1px solid #fff;
+  border-width: 1px 0.5px 1px;
+
+  border-style: solid;
+
+border-radius: 5px;
+  border-color:#000;
 }
 
 
@@ -703,7 +754,7 @@ border: 1px solid #fff;
   padding: 0;
   margin: 0;
   list-style-type: none;
-  height: 10vh;
+  height: 11vh;
   background: #236c9c;
   color: white;
   cursor: pointer;

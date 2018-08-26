@@ -34,17 +34,21 @@
   h1 {
     font-size: 1.5em;
     color: #222;
+      font-family: "Roboto", sans-serif;
   }
   h2 {
-    font-size: 0.9em;
+    font-size: 1.1em;
+      font-family: "Roboto", sans-serif;
   }
   h3 {
     font-size: 1.3em;
     font-weight: 300;
     line-height: 2.4em;
+      font-family: "Roboto", sans-serif;
   }
   h4{
     font-size: 0.6em;
+      font-family: "Roboto", sans-serif;
   }
   }
   p {
@@ -101,8 +105,19 @@
     border-collapse: collapse;
 
   }
+  strong{
+    font-family: "Roboto", sans-serif;
+  }
+
+.cabecalho .right {
+  float: left;
+
+  width:100%;
+
+}
 .cabecalho span{
-  font-size: 0.9em;
+
+  font-size: 1.0em;
   color: #000;
   font-weight:bold;
   font-family: "Roboto", sans-serif;
@@ -125,16 +140,17 @@
   border-color:#000;
   }
   .grid{
+
 text-align: right;
     border-width: 1px 0px 0px;
 
     border-style: solid;
-
-
+  margin-left:1em;
+  margin-right:1em;
     border-color:#000;
 
 margin-top:1.5em;
-margin-bottom:1.5em;
+
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
@@ -147,15 +163,24 @@ margin-top:1.5em;
 margin-bottom:1.5em;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+      margin-right:1em;
 
   }
   .grid span{
 
 
 
-    align-items: center;
-    justify-content: center;
-    height: 1.4em;
+
+    color: #000;
+    text-decoration: none;
+    font-size: 1em;
+  }
+
+  .grid2 span{
+
+
+
+
     color: #000;
     text-decoration: none;
     font-size: 0.8em;
@@ -174,6 +199,13 @@ font-size: 0.7em;
     font-size: 0.7em;
 text-align: left;
   }
+
+.left{
+    float: left;
+}
+.right{
+    float: right;
+}
   .rate{
       width: 16mm;
 font-size: 0.7em;
@@ -220,6 +252,7 @@ text-align: center;
 
       </div>
       <div class="cabecalho">
+        <span><?php echo $pedidomesa['data'] ?></span><br/>
           <span>MESA: <?php echo  $pedidomesa['numeromesa'] ?></span><br/>
 
 
@@ -278,23 +311,25 @@ $desconto = valordescontomesa($idpedido);
 
   <span></span>
   <span><strong>Total</strong></span>
-  <span><strong>R$ <?php echo $total?></strong></span>
+  <span><strong>R$ <?php echo number_format((float)$total,2,'.','');?></strong></span>
 
 </div>
 
 <div class="grid2">
   <span></span>
   <span>Pago</span>
-  <span>R$ <?php echo $valorpago?></span>
+  <span>R$ <?php echo number_format((float)$valorpago,2,'.',''); ?></span><br/>
+
+
   <span></span>
   <span>A pagar</span>
-  <span>R$ <?php echo $desconto?></span>
+  <span>R$ <?php echo number_format((float)($total-$valorpago),2,'.',''); ?></span>
 
 
 </div>
 					<div id="legalcopy">
-						<p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
-						</p>
+					<!--	<p class="legal"><strong>Thank you for your business!</strong>  Payment is expected within 31 days; please process this invoice within that time. There will be a 5% interest charge per month on late invoices.
+          </p>!-->
 					</div>
 
 				</div><!--End InvoiceBot-->

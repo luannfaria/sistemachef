@@ -29,9 +29,9 @@
   <div class="left">
     <div class="teste">
 
-      <span>PEDIDO: <?php echo $pedidomesa['idpedidomesa'] ?></span>
-<span>INICIO: <?php echo $pedidomesa['horaabertura'] ?></span>
-      <span><STRONG>MESA <?php echo $pedidomesa['numeromesa'] ?> </STRONG></span>+
+      <span> <h2>MESA <strong><?php echo $pedidomesa['numeromesa'] ?></strong> </h2></span>
+<span>Abertura: <?php echo $pedidomesa['horaabertura'] ?></span>
+      <span>Nº pedido: <?php echo $pedidomesa['idpedidomesa'] ?></span>
 
 
 
@@ -66,17 +66,64 @@
         </tbody>
       </table>
     </div>
-    <div class="descricao">
+    <?php
+        $idpedido =$pedidomesa['idpedidomesa'];
+     $this->load->helper("funcoes");
+     $troco =0;
 
+     $desconto=0;
+    $total = subtotal($idpedido);
+  $valortaxa = valortaxa($idpedido);
+  $valorpago = pago($idpedido);
+  $desconto = valordescontomesa($idpedido);
+    ?>
+    <div class="descricao">
+<span></span>
+
+<span>
+ <div class="pessoas">
+
+  <a href="#pessoas" data-toggle="modal">
+        Pessoas : <?php echo $pedidomesa['pessoasmesa']?></a></div></span>
+        <span></span>
+<span><strong>Itens R$ <?php echo  number_format((float)($total-$valortaxa),2,'.','') ?></strong></span>
 
     </div>
+
+
     <div class="order-total">
 
     </div>
 
     <div class="buttons">
+<span></span>
+
+
     </div>
   </div>
+
+  <div class="modal fade" id="pessoas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-contentpessoas">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">PESSOAS</h4>
+          </div>
+          <div class="frmpessoas">
+            <h3>Nº Pessoas</h3>
+            <form action="" id="formpessoasmesa" method="post">
+                    <div class="col-lg-6">
+
+                            <input type="text" class="form-control  input-lg"  value="<?php echo $pedidomesa['pessoasmesa']?>" name="qtdepessoasmesa" id="qtdepessoasmesa"/>
+                            <input type="hidden" name="formpessoaidpedido" id="formpessoaidpedido" value="<?php echo $pedidomesa['idpedidomesa']?>" />
+
+                </div>
+                </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
   <div class="right">
 
     <div class="teste2">
@@ -243,17 +290,8 @@
 
     <div id="total"class="totalizador">
 
-      <?php
-          $idpedido =$pedidomesa['idpedidomesa'];
-       $this->load->helper("funcoes");
-       $troco =0;
 
-       $desconto=0;
-      $total = subtotal($idpedido);
-    $valortaxa = valortaxa($idpedido);
-    $valorpago = pago($idpedido);
-    $desconto = valordescontomesa($idpedido);
-      ?>
+
       <span><strong>Pago R$ <?php echo  number_format((float)$valorpago,2,'.','') ?></strong></span>
         <span><strong>Desconto R$ <?php echo  number_format((float)$desconto,2,'.','') ?></strong></span>
       <span><strong>Serviço R$ <?php echo  number_format((float)$valortaxa,2,'.','') ?></strong></span>
@@ -669,6 +707,48 @@ var pago = document.getElementById("vlrpgto");
 document.getElementById("troco").innerHTML = tr;
   document.getElementById("totalrecebido").innerHTML = val;
 }
+
+
+$('#pessoas').keypress(function(e) {
+
+  if(e.wich == 13 || e.keyCode == 13){
+
+    var dados = $('#formpessoasmesa').serialize();
+
+  $.ajax({
+  type: "POST",
+  url:"<?php echo base_url();?>pedidomesa/npessoas",
+  data:dados,
+  dataType:'json',
+  success:function(data)
+  {
+
+  if(data.result == true){
+
+  location.reload();
+
+
+  // /$("#total").load("<?php echo current_url();?> #total" );
+
+
+  }
+
+  else{
+
+
+  location.reload();
+
+
+  }
+
+  }
+
+  });
+  return false;
+
+
+  }
+});
 
 $('#modalprodutopedido').keypress(function(e) {
 

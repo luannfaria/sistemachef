@@ -5,6 +5,8 @@
  */
 
 require __DIR__ .'/../third_party/mpdf/mpdf.php';
+
+
 class Impressoras extends CI_Controller{
 
   public function __construct() {
@@ -34,12 +36,31 @@ class Impressoras extends CI_Controller{
 
 $html =$this->load->view('pedidomesa/conta',$data,true);
 
-//generate the PDF from the given html
-$mpdf = new mpdf();
 
-      $mpdf->WriteHTML($html);
+
+//$mpdf = new mpdf();
+
+  //$mpdf->WriteHTML($html);
+
+//$content = $mpdf->Output('', 'S');
+$this->load->helper("printer");
+teste();
+//$connector = new WindowsPrintConnector("pos");
+
+      /* Print a "Hello world" receipt" */
+//$printer = new Printer($connector);
+
+
+    // Enter the share name for your USB printer here
+//    $connector = "itautec";
+
+
+
+
+//generate the PDF from the given html
+
 
         //download it.
-      	$mpdf->Output();
+  //	$mpdf->Output();
     }
   }

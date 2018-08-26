@@ -43,11 +43,33 @@ class Pedidomesa extends CI_Controller{
     /*
      * Adding a new pedidomesa
      */
+function npessoas(){
 
+  $params =$this->input->post('qtdepessoasmesa');
+  $idpedidopdv =$this->input->post('formpessoaidpedido');
+
+  $this->Pedidomesa_model->npessoas($idpedidopdv,$params);
+
+    echo json_encode(array('result'=> true));
+
+
+
+}
      function mesaaberta(){
 
 $pedido = $this->input->post('idpedidomesa');
           redirect('pedidomesa/editapedido/'.$pedido);
+
+     }
+
+     function desconto(){
+
+       $params =$this->input->post('descontovalor');
+       $idpedidopdv =$this->input->post('formdescontoid');
+
+$this->Pedidomesa_model->desconto($idpedidopdv,$params);
+
+  echo json_encode(array('result'=> true));
 
      }
 

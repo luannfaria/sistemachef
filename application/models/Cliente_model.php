@@ -33,11 +33,11 @@ class Cliente_model extends CI_Model
 
        $this->db->select('*');
 
-       $this->db->like('nome', $q);
+       $this->db->or_like(array('celular' => $q, 'telfixo' => $q));
        $query = $this->db->get('clientes');
        if($query->num_rows() > 0){
            foreach ($query->result_array() as $row){
-               $row_set[] = array('label'=>'NOME: '.$row['nome'].' | CEL: '.$row['celular'].'','nomecliente'=>$row['nome'],'idclientes'=>$row['idclientes'],'telfixo'=>$row['telfixo'],'celular'=>$row['celular'],'rua'=>$row['rua']);
+               $row_set[] = array('label'=>'NOME: '.$row['nome'].' | CEL: '.$row['celular'].' | TEL: '.$row['telfixo'].'','nomecliente'=>$row['nome'],'idclientes'=>$row['idclientes'],'telfixo'=>$row['telfixo'],'celular'=>$row['celular'],'rua'=>$row['rua']);
            }
            echo json_encode($row_set);
        }

@@ -11,6 +11,9 @@ class Pedidodelivery extends CI_Controller{
         $this->load->model('Pedidodelivery_model');
         $this->load->model('Produto_model');
             $this->load->model('Categoria_model');
+            $this->load->model('Taxaentrega_model');
+            $this->load->model('Adicional_model');
+              $this->load->model('Observaco_model');
     }
 
     /*
@@ -37,6 +40,9 @@ class Pedidodelivery extends CI_Controller{
      */
     function add()
     {
+      $data['observacoes']=$this->Observaco_model->get_todas_observacoes();
+      $data['adicionais']=$this->Adicional_model->get_all_adicionais();
+       $data['taxaentrega'] = $this->Taxaentrega_model->get_all_taxaentrega();
        $data['produtos'] = $this->Produto_model->get_todos();
       $data['categoria'] = $this->Categoria_model->get_todos();
             $this->load->view('pedidodelivery/add',$data);
